@@ -1135,3 +1135,41 @@ body[data-page="auth"] main {
 }
 
 }
+/************ FIX FORMULAIRE CONNEXION / INSCRIPTION ************/
+
+/* Empêche les champs du formulaire d’être mis côte à côte */
+.auth-card form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+}
+
+/* Tous les champs doivent s’étirer à 100% */
+.auth-card .field {
+    width: 100% !important;
+}
+
+.auth-card input,
+.auth-card select,
+.auth-card textarea {
+    width: 100% !important;
+}
+
+/* Empêche le formulaire de dépasser */
+.auth-card {
+    max-width: 520px !important;
+}
+
+/* Empêche la grille de casser quand le formulaire switch */
+.auth-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: nowrap;
+}
+
+.auth-side {
+    min-width: 380px;
+    max-width: 420px;
+}
+
