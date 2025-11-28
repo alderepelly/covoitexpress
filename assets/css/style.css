@@ -1107,3 +1107,30 @@ body[data-page="auth"] main {
     padding: 1.25rem 1rem;
   }
 }
+/* Correction spécifique pour la page connexion */
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.auth-card .field {
+    width: 100%;
+}
+
+.auth-card input,
+.auth-card select,
+.auth-card textarea {
+    width: 100%;
+}
+
+.auth-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 50% / 50% */
+    gap: 2rem;
+}
+
+.auth-card {
+    max-width: 550px;
+}
