@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Résultats de covoiturage – CovoitExpress</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="results">
+  <header>
+    <nav class="nav">
+      <div class="logo">
+        <div class="logo-icon">CE</div>
+        <a href="index.html"><span>CovoitExpress</span></a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#comment-ca-marche">Comment ça marche</a>
+        <a href="index.html#confiance">Sécurité & Confiance</a>
+        <a href="index.html#aide">Centre d'aide</a>
+      </div>
+      <div class="nav-cta">
+        <a href="connexion.html" class="btn btn-outline">Se connecter</a>
+        <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="page-title">Résultats de votre recherche</h1>
+    <p class="page-subtitle" id="searchTitle">
+      Chargement de votre trajet…
+    </p>
+
+    <div class="search-summary">
+      <div id="chipsContainer"></div>
+      <div class="filters">
+        <button type="button">Départ le plus tôt</button>
+        <button type="button">Prix le plus bas</button>
+        <button type="button">Meilleures notes</button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <section class="card">
+        <div id="resultsContainer"></div>
+      </section>
+
+      <aside class="card">
+        <h2 class="sidebar-title">Récapitulatif</h2>
+        <div class="mini-map" id="miniMap">
+          Carte / trajet (emplacement réservé)
+        </div>
+        <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0.6rem;">
+          Tu peux intégrer ici une vraie carte plus tard (par ex. Mapbox, Leaflet, Google Maps…).
+        </p>
+        <p style="font-size:0.9rem;">
+          Astuce : ajoute des filtres supplémentaires (bagages, animaux, distance du point de départ, 
+          note minimum du conducteur…) pour affiner encore plus la recherche.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> CovoitExpress – Exemple de site de covoiturage.</div>
+      <div class="footer-links">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
