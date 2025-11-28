@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body data-page="auth">
+<body>
   <header>
     <nav class="nav">
       <div class="logo">
@@ -31,8 +31,8 @@
       <!-- Carte login / signup -->
       <section class="auth-card">
         <div class="tabs">
-            <button class="tab tab-active" type="button" data-tab="login">Se connecter</button>
-            <button class="tab" type="button" data-tab="signup">Créer un compte</button>
+          <button class="tab tab-active" type="button" data-tab="login">Se connecter</button>
+          <button class="tab" type="button" data-tab="signup">Créer un compte</button>
         </div>
 
         <h1 class="auth-title" id="authTitle">Content de te revoir 👋</h1>
@@ -161,9 +161,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/app.js"></script>
-    <script>
-    // On ne lance le code que sur la page de connexion
+  <!-- ✅ Script gérant les onglets -->
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       const tabs = document.querySelectorAll(".tab");
       const loginForm = document.getElementById("loginForm");
@@ -171,13 +170,13 @@
       const authTitle = document.getElementById("authTitle");
       const authSubtitle = document.getElementById("authSubtitle");
 
-      // Changement d'onglet
+      // Switch onglets
       tabs.forEach(tab => {
         tab.addEventListener("click", () => {
           tabs.forEach(t => t.classList.remove("tab-active"));
           tab.classList.add("tab-active");
 
-          const mode = tab.dataset.tab; // "login" ou "signup"
+          const mode = tab.dataset.tab;
 
           if (mode === "login") {
             loginForm.style.display = "flex";
@@ -222,8 +221,5 @@
       });
     });
   </script>
-</body>
-</html>
-
 </body>
 </html>
