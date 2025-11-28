@@ -1106,8 +1106,7 @@ body[data-page="auth"] main {
   .auth-side {
     padding: 1.25rem 1rem;
   }
-}
-/* Correction spécifique pour la page connexion */
+  /* Correction spécifique pour la page connexion */
 .auth-card form {
     display: flex;
     flex-direction: column;
@@ -1133,4 +1132,6 @@ body[data-page="auth"] main {
 
 .auth-card {
     max-width: 550px;
+}
+
 }
