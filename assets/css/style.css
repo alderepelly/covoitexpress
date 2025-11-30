@@ -187,3 +187,34 @@ select:focus {
   color: var(--primary-dark);
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
+/* --- NAVIGATION SIMPLE & DISCRÈTE --- */
+.nav {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.nav-right a,
+.nav-right button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: 0.2s;
+}
+
+.nav-right a:hover,
+.nav-right button:hover {
+  color: var(--primary-dark);
+}
+
