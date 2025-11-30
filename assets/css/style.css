@@ -1,6 +1,4 @@
-/**************************************************
-*  VARIABLES GLOBALES
-**************************************************/
+/* VARIABLES */
 :root {
   --primary: #1c9ea8;
   --primary-dark: #15737b;
@@ -12,14 +10,11 @@
   --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.12);
 }
 
-/**************************************************
-*  RESET + BASE
-**************************************************/
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystem, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
@@ -33,9 +28,7 @@ a {
   color: inherit;
 }
 
-/**************************************************
-*  HEADER
-**************************************************/
+/* HEADER */
 header {
   position: sticky;
   top: 0;
@@ -52,6 +45,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .logo {
@@ -60,7 +54,6 @@ header {
   gap: 0.6rem;
   font-weight: 800;
   font-size: 1.1rem;
-  letter-spacing: .03em;
 }
 
 .logo-icon {
@@ -76,25 +69,12 @@ header {
   box-shadow: 0 12px 24px rgba(12, 148, 136, 0.45);
 }
 
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  color: var(--muted);
-}
-
-.nav-links a:hover {
-  color: var(--primary-dark);
-}
-
 .nav-cta {
   display: flex;
   gap: 0.75rem;
 }
 
-/**************************************************
-*  BOUTONS
-**************************************************/
+/* BUTTONS */
 .btn {
   border-radius: 999px;
   border: none;
@@ -104,6 +84,8 @@ header {
   transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
   font-weight: 600;
 }
 
@@ -112,144 +94,75 @@ header {
   color: white;
   box-shadow: 0 12px 25px rgba(15, 118, 110, 0.45);
 }
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
 
 .btn-outline {
   background: white;
-  border: 1px solid rgba(148, 163, 184, 0.7);
+  border: 1px solid var(--muted);
   color: var(--text);
 }
 
-.btn-full {
-  width: 100%;
+/* CONTAINERS */
+.container,
+.container-small {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
-/**************************************************
-*  MAIN WRAPPER
-**************************************************/
-main {
-  max-width: 1120px;
-  margin: 1.5rem auto 3.5rem;
-  padding: 0 1.25rem;
+.container-small {
+  max-width: 420px;
 }
 
-/**************************************************
-*  FOOTER
-**************************************************/
-footer {
-  border-top: 1px solid rgba(148, 163, 184, 0.35);
-  padding: 1.5rem 1.25rem 2rem;
-  margin-top: 2.5rem;
-  font-size: 0.8rem;
-  color: var(--muted);
+/* TITLES */
+.center {
+  text-align: center;
 }
 
-.footer-inner {
-  max-width: 1120px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-/**************************************************
-*  CHAMPS FORMULAIRES
-**************************************************/
-.field {
+/* FORMS */
+.form-card {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  font-size: 0.78rem;
-  color: var(--muted);
+  gap: 1rem;
 }
 
-.field-input,
-.field-textarea,
-.field-select {
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.7);
-  padding: 0.55rem 0.9rem;
-  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
   background: #f9fafb;
 }
 
-/**************************************************
-*  PAGE CONNEXION / INSCRIPTION (auth)
-**************************************************/
-body[data-page="auth"] main {
-  display: flex;
-  justify-content: center;
-  padding-top: 2rem;
-}
-
-.auth-wrapper {
-  max-width: 920px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 1.5rem;
-}
-
-.auth-card {
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
   background: white;
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  max-width: 520px; /* FIX ANTI SUPERPOSITION */
 }
 
-.auth-side {
-  background: linear-gradient(145deg, #e0f7fb, #f9fafb);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-}
-
-/* Les formulaires doivent TOUJOURS être verticaux */
-body[data-page="auth"] .auth-card form {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1rem;
-}
-
-/* Fixe les champs à 100% */
-body[data-page="auth"] .field,
-body[data-page="auth"] input,
-body[data-page="auth"] select {
-  width: 100% !important;
-}
-
-/**************************************************
-*  FIX : FORM-ROW NE DOIT PAS TOUCHER LA PAGE AUTH
-**************************************************/
-body[data-page="proposer"] .form-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
-}
-
-body[data-page="auth"] .form-row {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 1rem;
-}
-
-/**************************************************
-*  RESPONSIVE
-**************************************************/
-@media (max-width: 900px) {
-  .auth-wrapper {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 720px) {
-  .nav-links {
-    display: none;
-  }
-
-  .auth-card,
-  .auth-side {
-    padding: 1.25rem 1rem;
-  }
+/* RESULTS LIST */
+.ride-card {
+  background: #f9fafb;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  padding: 1rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
