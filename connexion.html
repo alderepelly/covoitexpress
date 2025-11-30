@@ -1,225 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Connexion / Inscription – CovoitExpress</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Connexion – CovoitExpress</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
-  <header>
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-icon">CE</div>
-        <a href="index.html"><span>CovoitExpress</span></a>
-      </div>
-      <div class="nav-links">
-        <a href="index.html#comment-ca-marche">Comment ça marche</a>
-        <a href="index.html#confiance">Sécurité & Confiance</a>
-        <a href="index.html#aide">Centre d'aide</a>
-      </div>
-      <div class="nav-cta">
-        <a href="connexion.html" class="btn btn-outline">Se connecter</a>
-        <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <div class="auth-wrapper">
-      <!-- Carte login / signup -->
-      <section class="auth-card">
-        <div class="tabs">
-          <button class="tab tab-active" type="button" data-tab="login">Se connecter</button>
-          <button class="tab" type="button" data-tab="signup">Créer un compte</button>
-        </div>
-
-        <h1 class="auth-title" id="authTitle">Content de te revoir 👋</h1>
-        <p class="auth-subtitle" id="authSubtitle">
-          Connecte-toi pour retrouver tes trajets, tes conducteurs et tes passagers.
-        </p>
-
-        <!-- Formulaire connexion -->
-        <form id="loginForm">
-          <div class="field">
-            <label for="loginEmail">Email</label>
-            <input class="field-input" type="email" id="loginEmail" placeholder="toi@example.com" required />
-          </div>
-          <div class="field">
-            <label for="loginPassword">Mot de passe</label>
-            <input class="field-input" type="password" id="loginPassword" placeholder="••••••••" required />
-          </div>
-          <div class="meta-row">
-            <label style="display:flex; align-items:center; gap:0.35rem;">
-              <input type="checkbox" id="rememberMe" style="margin:0;" />
-              <span>Rester connecté</span>
-            </label>
-            <a href="#">Mot de passe oublié ?</a>
-          </div>
-
-          <button class="btn btn-primary btn-full" type="submit">
-            Se connecter
-          </button>
-
-          <div class="or">ou</div>
-
-          <div class="social-btns">
-            <button type="button" class="social-btn">Continuer avec Google</button>
-            <button type="button" class="social-btn">Continuer avec Apple</button>
-          </div>
-
-          <p class="hint">
-            En te connectant, tu acceptes les Conditions générales et la Politique de confidentialité.
-          </p>
-        </form>
-
-        <!-- Formulaire inscription -->
-        <form id="signupForm" style="display:none;">
-          <div class="field">
-            <label for="signupName">Prénom</label>
-            <input class="field-input" type="text" id="signupName" placeholder="Ton prénom" required />
-          </div>
-          <div class="field">
-            <label for="signupEmail">Email</label>
-            <input class="field-input" type="email" id="signupEmail" placeholder="toi@example.com" required />
-          </div>
-          <div class="field">
-            <label for="signupPassword">Mot de passe</label>
-            <input class="field-input" type="password" id="signupPassword" placeholder="Au moins 8 caractères" required />
-          </div>
-          <div class="field">
-            <label for="signupConfirm">Confirmation du mot de passe</label>
-            <input class="field-input" type="password" id="signupConfirm" placeholder="Répète le mot de passe" required />
-          </div>
-
-          <div class="field">
-            <label for="signupRole">Je m’inscris plutôt comme</label>
-            <select id="signupRole" class="field-input">
-              <option value="passager">Passager</option>
-              <option value="conducteur">Conducteur</option>
-              <option value="les-deux">Les deux</option>
-            </select>
-          </div>
-
-          <div class="meta-row">
-            <label style="display:flex; align-items:center; gap:0.35rem;">
-              <input type="checkbox" id="acceptTerms" style="margin:0;" />
-              <span>J’accepte les Conditions générales</span>
-            </label>
-          </div>
-
-          <button class="btn btn-primary btn-full" type="submit">
-            Créer mon compte
-          </button>
-
-          <p class="hint">
-            Tu pourras compléter ton profil plus tard (photo, voiture, préférences…).
-          </p>
-        </form>
-      </section>
-
-      <!-- Côté droit : pitch / confiance -->
-      <aside class="auth-side">
-        <span class="badge">+2 millions de sièges déjà partagés</span>
-        <h2 class="side-title">Une communauté de covoiturage fiable et bien notée</h2>
-        <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0.7rem;">
-          Crée ton compte pour réserver ou proposer des trajets en quelques clics et voyager à moindre coût.
-        </p>
-
-        <div class="side-list">
-          <div class="side-item">
-            <div class="dot"></div>
-            <div>Profils vérifiés, notes et avis après chaque trajet.</div>
-          </div>
-          <div class="side-item">
-            <div class="dot"></div>
-            <div>Paiement sécurisé, pas d’échange d’argent liquide à bord.</div>
-          </div>
-          <div class="side-item">
-            <div class="dot"></div>
-            <div>Support disponible en cas de problème avec un trajet.</div>
-          </div>
-        </div>
-
-        <p class="small-note">
-          Conseil : utilise la même adresse email pour tes réservations et tes trajets en tant que conducteur, 
-          afin de tout retrouver au même endroit.
-        </p>
-      </aside>
+<header>
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">JD</div>
+      <span>JaalibaDaily</span>
     </div>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="year"></span> CovoitExpress – Exemple de site de covoiturage.</div>
-      <div class="footer-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
-        <a href="#">Cookies</a>
-      </div>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-outline">Accueil</a>
     </div>
-  </footer>
+  </nav>
+</header>
 
-  <!-- ✅ Script gérant les onglets -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const tabs = document.querySelectorAll(".tab");
-      const loginForm = document.getElementById("loginForm");
-      const signupForm = document.getElementById("signupForm");
-      const authTitle = document.getElementById("authTitle");
-      const authSubtitle = document.getElementById("authSubtitle");
+<section class="container-small">
+  <h1 class="center">Connexion</h1>
 
-      // Switch onglets
-      tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-          tabs.forEach(t => t.classList.remove("tab-active"));
-          tab.classList.add("tab-active");
+  <form class="form-card">
+    <div>
+      <label>Email</label>
+      <input type="email" placeholder="exemple@mail.com" required>
+    </div>
 
-          const mode = tab.dataset.tab;
+    <div>
+      <label>Mot de passe</label>
+      <input type="password" placeholder="••••••••" required>
+    </div>
 
-          if (mode === "login") {
-            loginForm.style.display = "flex";
-            signupForm.style.display = "none";
-            authTitle.textContent = "Content de te revoir 👋";
-            authSubtitle.textContent = "Connecte-toi pour retrouver tes trajets, tes conducteurs et tes passagers.";
-          } else {
-            loginForm.style.display = "none";
-            signupForm.style.display = "flex";
-            authTitle.textContent = "Bienvenue dans CovoitExpress 🚗";
-            authSubtitle.textContent = "Crée ton compte pour réserver ou proposer ton premier trajet.";
-          }
-        });
-      });
+    <button class="btn btn-primary">Se connecter</button>
+  </form>
+</section>
 
-      // Soumission "fake" connexion
-      loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const email = document.getElementById("loginEmail").value;
-        alert("Connexion simulée pour " + email + " ✅ (à connecter plus tard à un vrai backend).");
-      });
-
-      // Soumission "fake" inscription
-      signupForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const pwd = document.getElementById("signupPassword").value;
-        const confirm = document.getElementById("signupConfirm").value;
-        const acceptTerms = document.getElementById("acceptTerms").checked;
-
-        if (pwd !== confirm) {
-          alert("Les mots de passe ne correspondent pas.");
-          return;
-        }
-        if (!acceptTerms) {
-          alert("Merci d’accepter les Conditions générales pour créer un compte.");
-          return;
-        }
-
-        const email = document.getElementById("signupEmail").value;
-        const name = document.getElementById("signupName").value;
-        alert("Compte simulé pour " + name + " (" + email + ") ✅ (à connecter plus tard à un vrai backend).");
-      });
-    });
-  </script>
 </body>
 </html>
