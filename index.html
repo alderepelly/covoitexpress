@@ -211,6 +211,45 @@
             });
         });
     </script>
+    <script>
+// HEADER DYNAMIQUE
+document.addEventListener("DOMContentLoaded", () => {
+    const header = document.querySelector(".nav-cta");
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!header) return;
+
+    if (!currentUser) {
+        // NON CONNECTÉ
+        header.innerHTML = `
+            <a href="connexion.html" class="btn btn-outline">Connexion</a>
+            <a href="inscription.html" class="btn btn-primary">Créer un compte</a>
+        `;
+    } else {
+        // CONNECTÉ
+        header.innerHTML = `
+            <a href="index.html" class="btn btn-outline">Accueil</a>
+            <a href="recherche.html" class="btn btn-primary">Rechercher</a>
+            <a href="proposer.html" class="btn btn-outline">Proposer</a>
+            <a href="mes-reservations.html" class="btn btn-outline">Mes réservations</a>
+            <a href="profil.html" class="btn btn-primary">Profil</a>
+            <button id="logoutBtn" class="btn btn-outline">Se déconnecter</button>
+        `;
+    }
+
+    // Bouton déconnexion
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("currentUser");
+            alert("Déconnexion réussie");
+            window.location.href = "index.html";
+        });
+    }
+});
+</script>
+
 
 </body>
 
