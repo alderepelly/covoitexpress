@@ -1,233 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Proposer un trajet – CovoitExpress</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-page="propose">
-  <header>
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-icon">CE</div>
-        <a href="index.html"><span>CovoitExpress</span></a>
-      </div>
-      <div class="nav-links">
-        <a href="index.html#comment-ca-marche">Comment ça marche</a>
-        <a href="index.html#confiance">Sécurité & Confiance</a>
-        <a href="index.html#aide">Centre d'aide</a>
-      </div>
-      <div class="nav-cta">
-        <a href="connexion.html" class="btn btn-outline">Se connecter</a>
-        <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <main>
-    <div class="page-header">
-      <h1 class="page-title">Proposer un trajet</h1>
-      <p class="page-subtitle">
-        Indique ton trajet, le nombre de places et tes préférences. Nous te suggérons un prix juste en fonction
-        de la distance et des habitudes de la communauté.
-      </p>
+<header>
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">JD</div>
+      <span>JaalibaDaily</span>
+    </div>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-outline">Accueil</a>
+    </div>
+  </nav>
+</header>
+
+<section class="container">
+  <h1 class="center">Proposer un trajet</h1>
+
+  <form class="form-card">
+    <div>
+      <label>Départ</label>
+      <input type="text" id="from" placeholder="Ville de départ" required>
     </div>
 
-    <div class="layout">
-      <!-- Formulaire principal -->
-      <section class="card">
-        <h2 class="section-title">Détails du trajet</h2>
-
-        <form id="tripForm">
-          <div class="form-row">
-            <div class="field">
-              <label for="from">
-                Ville de départ
-                <span class="chip-inline">Point de rendez-vous précis</span>
-              </label>
-              <input class="field-input" type="text" id="from" placeholder="Paris, Gare de Lyon" required />
-              <div class="hint">Tu pourras préciser le lieu exact dans la messagerie.</div>
-            </div>
-            <div class="field">
-              <label for="to">Ville d'arrivée</label>
-              <input class="field-input" type="text" id="to" placeholder="Lyon, Part-Dieu" required />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="date">Date de départ</label>
-              <input class="field-input" type="date" id="date" required />
-            </div>
-            <div class="field">
-              <label for="time">Heure de départ</label>
-              <input class="field-input" type="time" id="time" required />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="returnDate">
-                Trajet retour (optionnel)
-                <span class="hint">Si tu fais l'aller-retour</span>
-              </label>
-              <input class="field-input" type="date" id="returnDate" />
-            </div>
-            <div class="field">
-              <label for="returnTime">Heure du retour</label>
-              <input class="field-input" type="time" id="returnTime" />
-            </div>
-          </div>
-
-          <div class="separator"></div>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="seats">Places disponibles</label>
-              <select class="field-select" id="seats" required>
-                <option value="1">1 place</option>
-                <option value="2">2 places</option>
-                <option value="3">3 places</option>
-                <option value="4">4 places</option>
-              </select>
-              <div class="hint">Ne compte pas la place conducteur.</div>
-            </div>
-            <div class="field">
-              <label for="price">Prix par passager (€)</label>
-              <div class="price-input-group">
-                <input class="field-input" type="number" id="price" min="1" step="1" placeholder="Ex : 20" required />
-                <span>/ passager</span>
-              </div>
-              <div class="hint" id="priceHint">Nous calculerons une estimation totale automatiquement.</div>
-            </div>
-          </div>
-
-          <div class="separator"></div>
-
-          <h2 class="section-title" style="margin-top:0.2rem;">Véhicule & confort</h2>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="carModel">Modèle de voiture</label>
-              <input class="field-input" type="text" id="carModel" placeholder="Renault Clio, Peugeot 308…" />
-              <div class="hint">Un modèle clair rassure les passagers.</div>
-            </div>
-            <div class="field">
-              <label for="carColor">Couleur de la voiture</label>
-              <input class="field-input" type="text" id="carColor" placeholder="Bleu, gris, noir…" />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="field">
-              <label for="luggage">Bagages</label>
-              <select class="field-select" id="luggage">
-                <option value="petit">Petit sac / sac à dos</option>
-                <option value="cabin">Valise cabine</option>
-                <option value="grande">Grande valise possible</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="music">Ambiance à bord</label>
-              <select class="field-select" id="music">
-                <option value="discut">On discute volontiers</option>
-                <option value="calme">Plutôt calme</option>
-                <option value="musique">Musique en fond</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label>Préférences</label>
-            <div class="options-grid">
-              <label class="option-pill">
-                <input type="checkbox" id="petsAllowed" />
-                <span>Animaux acceptés</span>
-              </label>
-              <label class="option-pill">
-                <input type="checkbox" id="smoking" />
-                <span>Non-fumeur</span>
-              </label>
-              <label class="option-pill">
-                <input type="checkbox" id="mask" />
-                <span>Masque recommandé</span>
-              </label>
-              <label class="option-pill">
-                <input type="checkbox" id="detour" />
-                <span>Petits détours possibles</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="message">Message aux passagers</label>
-            <textarea class="field-textarea" id="message" placeholder="Ex : Je pars à l'heure, pause sur une aire d'autoroute, animaux acceptés si propres…"></textarea>
-          </div>
-
-          <div class="checkbox-row">
-            <input type="checkbox" id="terms" />
-            <label for="terms">
-              Je confirme respecter le code de la route, ne pas faire de ce trajet une activité professionnelle
-              et accepter les conditions générales de la plateforme.
-            </label>
-          </div>
-
-          <div class="submit-row">
-            <button class="btn btn-primary btn-full" type="submit">
-              Publier mon trajet
-            </button>
-            <div class="submit-note" id="summaryNote">
-              Montant total estimé : – €
-            </div>
-          </div>
-        </form>
-      </section>
-
-      <!-- Sidebar récap -->
-      <aside class="card">
-        <span class="badge">
-          ✓ Conseils pour un trajet qui se remplit vite
-        </span>
-
-        <div class="summary-row">
-          <span>Recommandation prix</span>
-          <span id="recPrice">– € / passager</span>
-        </div>
-        <div class="summary-row">
-          <span>Revenu total estimé</span>
-          <span id="totalAmount">– €</span>
-        </div>
-        <div class="summary-row">
-          <span>CO₂ économisé*</span>
-          <span id="co2Saved">– kg</span>
-        </div>
-
-        <div class="separator" style="margin-top:0.6rem;"></div>
-
-        <div class="tips-list">
-          <div>• Fixe un prix raisonnable pour que ton trajet se remplisse plus rapidement.</div>
-          <div>• Renseigne bien l’heure de départ réelle et évite les gros retards.</div>
-          <div>• Un profil complet (photo, infos voiture) inspire davantage confiance.</div>
-          <div style="font-size:0.75rem; margin-top:0.4rem;">
-            *Estimation indicative par rapport à des trajets individuels en voiture.
-          </div>
-        </div>
-      </aside>
+    <div>
+      <label>Arrivée</label>
+      <input type="text" id="to" placeholder="Ville d’arrivée" required>
     </div>
-  </main>
 
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="year"></span> CovoitExpress – Exemple de site de covoiturage.</div>
-      <div class="footer-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
-        <a href="#">Cookies</a>
-      </div>
+    <div>
+      <label>Date</label>
+      <input type="date" id="date" required>
     </div>
-  </footer>
 
-  <script src="assets/js/app.js"></script>
+    <div>
+      <label>Heure</label>
+      <input type="time" id="time" required>
+    </div>
+
+    <div>
+      <label>Places disponibles</label>
+      <select id="seats">
+        <option value="1">1 place</option>
+        <option value="2">2 places</option>
+        <option value="3">3 places</option>
+        <option value="4">4 places</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Prix (€)</label>
+      <input type="number" id="price" min="1" placeholder="12" required>
+    </div>
+
+    <button class="btn btn-primary">Publier le trajet</button>
+  </form>
+</section>
+
 </body>
 </html>
