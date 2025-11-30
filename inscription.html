@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Créer un compte – JaalibaDaily</title>
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .password-wrapper {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  </style>
+
 </head>
 
 <body>
@@ -28,7 +44,16 @@
     <input id="email" type="email" placeholder="exemple@mail.com" required>
 
     <label>Mot de passe</label>
-    <input id="password" type="password" placeholder="••••••••" required>
+    <div class="password-wrapper">
+      <input id="password" type="password" placeholder="••••••••" required>
+      <span class="toggle-password" onclick="togglePassword('password', this)">👁</span>
+    </div>
+
+    <label>Confirmer mot de passe</label>
+    <div class="password-wrapper">
+      <input id="confirmPassword" type="password" placeholder="••••••••" required>
+      <span class="toggle-password" onclick="togglePassword('confirmPassword', this)">👁</span>
+    </div>
 
     <button class="btn btn-primary" id="registerBtn">Créer un compte</button>
 
@@ -40,27 +65,40 @@
 </div>
 
 <script>
-// INSCRIPTION
+function togglePassword(inputId, icon) {
+  const input = document.getElementById(inputId);
+  if (input.type === "password") {
+    input.type = "text";
+    icon.textContent = "🙈";
+  } else {
+    input.type = "password";
+    icon.textContent = "👁";
+  }
+}
+
 document.getElementById("registerBtn").addEventListener("click", () => {
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-  if (!email || !password) {
+  if (!email || !password || !confirmPassword) {
     alert("Veuillez remplir tous les champs.");
     return;
   }
 
-  // Liste des utilisateurs existants
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-
-  // Vérifier si l'email existe déjà
-  if (users.some(u => u.email === email)) {
-    alert("Un compte avec cet email existe déjà.");
+  if (password !== confirmPassword) {
+    alert("Les mots de passe ne correspondent pas !");
     return;
   }
 
-  // Ajouter l'utilisateur
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if (users.some(u => u.email === email)) {
+    alert("Un compte existe déjà avec cet email.");
+    return;
+  }
+
   users.push({ email, password });
   localStorage.setItem("users", JSON.stringify(users));
 
