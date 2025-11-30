@@ -2,203 +2,61 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Recherche de trajets – JaalibaDaily</title>
+  <title>Recherche de trajets – CovoitExpress</title>
   <link rel="stylesheet" href="assets/css/style.css">
-
- <div style="
-    max-width: 900px;
-    margin: 3rem auto;
-    padding: 2rem 2.5rem;
-    background: white;
-    border-radius: 24px;
-    box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(148,163,184,0.25);
-">
-
-    <h2 style="text-align:center; font-size:2rem; margin-bottom:1.5rem; font-weight:700;">
-        Rechercher un trajet
-    </h2>
-
-    <form id="searchForm" class="form-card">
-
-        <div>
-            <label>Départ</label>
-            <input id="from" type="text" placeholder="Matoto, Cosa, Kipé..." required>
-        </div>
-
-        <div>
-            <label>Arrivée</label>
-            <input id="to" type="text" placeholder="Kaloum, Lambanyi, Sonfonia..." required>
-        </div>
-
-        <div>
-            <label>Date</label>
-            <input id="date" type="date" required>
-        </div>
-
-        <button class="btn btn-primary" type="button" style="margin-top:1rem; width:100%;" onclick="searchTrips()">
-            Rechercher
-        </button>
-    </form>
-
-    <div id="results" class="results" style="margin-top:2rem;"></div>
-
-</div>
-
 </head>
-
 <body>
 
-<!-- NAVIGATION -->
 <header>
   <nav class="nav">
     <div class="logo">
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
-
-    <div class="nav-right" id="navRight"></div>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-outline">Nouvelle recherche</a>
+    </div>
   </nav>
 </header>
 
-<div class="container">
+<section class="container">
+  <h1 class="center">Résultats de recherche</h1>
 
-  <h2 class="center">Rechercher un trajet</h2>
+  <p id="searchInfo" class="center" style="margin-top:1rem; color:var(--muted);"></p>
 
-  <form id="searchForm" class="form-card">
-
-    <div>
-      <label>Départ</label>
-      <input id="from" type="text" placeholder="Matoto, Cosa, Kipé...">
-    </div>
-
-    <div>
-      <label>Arrivée</label>
-      <input id="to" type="text" placeholder="Kaloum, Lambanyi, Sonfonia...">
-    </div>
-
-    <div>
-      <label>Date</label>
-      <input id="date" type="date">
-    </div>
-
-    <button class="btn btn-primary" type="button" onclick="searchTrips()">Rechercher</button>
-
-  </form>
-
-  <div id="results" class="results"></div>
-
-</div>
+  <div id="results"></div>
+</section>
 
 <script>
-// Vérifier si utilisateur est connecté
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-if (!currentUser) {
-  alert("Vous devez être connecté pour rechercher un trajet.");
-  window.location.href = "connexion.html";
-}
+  const params = new URLSearchParams(window.location.search);
 
-// Charger les trajets
-let trips = JSON.parse(localStorage.getItem("trips")) || [];
+  const from = params.get("from");
+  const to = params.get("to");
+  const date = params.get("date");
 
-/* --- Recherche --- */
-function searchTrips() {
-  const from = document.getElementById("from").value.trim().toLowerCase();
-  const to = document.getElementById("to").value.trim().toLowerCase();
-  const date = document.getElementById("date").value;
+  document.getElementById("searchInfo").innerHTML =
+    `Trajets de <strong>${from}</strong> vers <strong>${to}</strong> le <strong>${date}</strong>`;
 
-  let results = trips.filter(t => {
-    return (
-      (from === "" || t.from.toLowerCase().includes(from)) &&
-      (to === "" || t.to.toLowerCase().includes(to)) &&
-      (date === "" || t.date === date)
-    );
-  });
+  const results = document.getElementById("results");
 
-  displayResults(results);
-}
+  // Exemple statique
+  const sampleResults = [
+    { time: "08:30", driver: "Clément", rating: "4.9★", price: 18 },
+    { time: "12:45", driver: "Sarah", rating: "5.0★", price: 20 },
+    { time: "19:00", driver: "Mehdi", rating: "4.8★", price: 15 }
+  ];
 
-/* --- Affichage des résultats --- */
-function displayResults(list) {
-  const container = document.getElementById("results");
-  container.innerHTML = "";
-
-  if (list.length === 0) {
-    container.innerHTML = "<p>Aucun trajet trouvé.</p>";
-    return;
-  }
-
-  list.forEach(t => {
-    container.innerHTML += `
-      <div class="trip-card">
-        <div class="trip-header">${t.from} → ${t.to}</div>
-        <div class="trip-meta">
-          Date : ${t.date}<br>
-          Places : ${t.seats}<br>
-          Prix : ${t.price} GNF<br>
-          Conducteur : ${t.owner}
+  sampleResults.forEach(r => {
+    results.innerHTML += `
+      <div class="ride-card">
+        <div>
+          <h3>${from} → ${to}</h3>
+          <p>${r.time} · ${r.driver} • ${r.rating}</p>
         </div>
-
-        <button class="btn btn-primary reserve-btn" onclick="reserve(${t.id})">
-          Réserver ce trajet
-        </button>
+        <strong>${r.price} €</strong>
       </div>
     `;
   });
-}
-
-/* --- Réserver un trajet --- */
-function reserve(id) {
-  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-  // vérifier si déjà réservé
-  if (bookings.some(b => b.tripId === id && b.user === currentUser.email)) {
-    alert("Vous avez déjà réservé ce trajet.");
-    return;
-  }
-
-  bookings.push({
-    bookingId: Date.now(),
-    tripId: id,
-    user: currentUser.email
-  });
-
-  localStorage.setItem("bookings", JSON.stringify(bookings));
-
-  alert("Trajet réservé avec succès !");
-}
-</script>
-
-<!-- BARRE DE NAVIGATION DYNAMIQUE -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const navRight = document.getElementById("navRight");
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (!user) {
-        navRight.innerHTML = `
-            <a href="connexion.html">Connexion</a>
-            <a href="inscription.html">Créer un compte</a>
-        `;
-    } else {
-        navRight.innerHTML = `
-            <a href="index.html">Accueil</a>
-            <a href="recherche.html">Rechercher</a>
-            <a href="proposer.html">Proposer</a>
-            <a href="mes-reservations.html">Mes réservations</a>
-            <a href="profil.html">Profil</a>
-            <button id="logoutBtn">Se déconnecter</button>
-        `;
-    }
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            localStorage.removeItem("currentUser");
-            window.location.href = "index.html";
-        });
-    }
-});
 </script>
 
 </body>
