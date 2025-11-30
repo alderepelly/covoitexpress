@@ -12,17 +12,25 @@
 <body>
 
     <!-- HEADER -->
-<header>
-  <nav class="nav">
-    <div class="logo">
-      <div class="logo-icon">JD</div>
-      <span>JaalibaDaily</span>
-    </div>
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <div class="logo-icon">JD</div>
+                <span>JaalibaDaily</span>
+            </div>
 
-    <div class="nav-right" id="navRight"></div>
-  </nav>
-</header>
+            <div class="nav-links">
+                <a href="#comment-ca-marche">Comment ça marche</a>
+                <a href="#confiance">Sécurité & Confiance</a>
+                <a href="#aide">Centre d'aide</a>
+            </div>
 
+            <div class="nav-cta">
+                <a href="connexion.html" class="btn btn-primary">Se connecter</a>
+                <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
+            </div>
+        </nav>
+    </header>
 
     <!-- MAIN -->
     <main style="max-width:1120px;margin:2rem auto;padding:1rem;">
@@ -203,39 +211,6 @@
             });
         });
     </script>
-   
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const navRight = document.getElementById("navRight");
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (!user) {
-        navRight.innerHTML = `
-            <a href="connexion.html">Connexion</a>
-            <a href="inscription.html">Créer un compte</a>
-        `;
-    } else {
-        navRight.innerHTML = `
-            <a href="index.html">Accueil</a>
-            <a href="recherche.html">Rechercher</a>
-            <a href="proposer.html">Proposer</a>
-            <a href="mes-reservations.html">Mes réservations</a>
-            <a href="profil.html">Profil</a>
-            <button id="logoutBtn">Se déconnecter</button>
-        `;
-    }
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            localStorage.removeItem("currentUser");
-            window.location.href = "index.html";
-        });
-    }
-});
-</script>
-
-
 
 </body>
 
