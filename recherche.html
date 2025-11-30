@@ -1,77 +1,63 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Résultats de covoiturage – CovoitExpress</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Recherche de trajets – CovoitExpress</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-page="results">
-  <header>
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-icon">CE</div>
-        <a href="index.html"><span>CovoitExpress</span></a>
-      </div>
-      <div class="nav-links">
-        <a href="index.html#comment-ca-marche">Comment ça marche</a>
-        <a href="index.html#confiance">Sécurité & Confiance</a>
-        <a href="index.html#aide">Centre d'aide</a>
-      </div>
-      <div class="nav-cta">
-        <a href="connexion.html" class="btn btn-outline">Se connecter</a>
-        <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <main>
-    <h1 class="page-title">Résultats de votre recherche</h1>
-    <p class="page-subtitle" id="searchTitle">
-      Chargement de votre trajet…
-    </p>
-
-    <div class="search-summary">
-      <div id="chipsContainer"></div>
-      <div class="filters">
-        <button type="button">Départ le plus tôt</button>
-        <button type="button">Prix le plus bas</button>
-        <button type="button">Meilleures notes</button>
-      </div>
+<header>
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">JD</div>
+      <span>JaalibaDaily</span>
     </div>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-outline">Nouvelle recherche</a>
+    </div>
+  </nav>
+</header>
 
-    <div class="layout">
-      <section class="card">
-        <div id="resultsContainer"></div>
-      </section>
+<section class="container">
+  <h1 class="center">Résultats de recherche</h1>
 
-      <aside class="card">
-        <h2 class="sidebar-title">Récapitulatif</h2>
-        <div class="mini-map" id="miniMap">
-          Carte / trajet (emplacement réservé)
+  <p id="searchInfo" class="center" style="margin-top:1rem; color:var(--muted);"></p>
+
+  <div id="results"></div>
+</section>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  const from = params.get("from");
+  const to = params.get("to");
+  const date = params.get("date");
+
+  document.getElementById("searchInfo").innerHTML =
+    `Trajets de <strong>${from}</strong> vers <strong>${to}</strong> le <strong>${date}</strong>`;
+
+  const results = document.getElementById("results");
+
+  // Exemple statique
+  const sampleResults = [
+    { time: "08:30", driver: "Clément", rating: "4.9★", price: 18 },
+    { time: "12:45", driver: "Sarah", rating: "5.0★", price: 20 },
+    { time: "19:00", driver: "Mehdi", rating: "4.8★", price: 15 }
+  ];
+
+  sampleResults.forEach(r => {
+    results.innerHTML += `
+      <div class="ride-card">
+        <div>
+          <h3>${from} → ${to}</h3>
+          <p>${r.time} · ${r.driver} • ${r.rating}</p>
         </div>
-        <p style="font-size:0.9rem; color:var(--muted); margin-bottom:0.6rem;">
-          Tu peux intégrer ici une vraie carte plus tard (par ex. Mapbox, Leaflet, Google Maps…).
-        </p>
-        <p style="font-size:0.9rem;">
-          Astuce : ajoute des filtres supplémentaires (bagages, animaux, distance du point de départ, 
-          note minimum du conducteur…) pour affiner encore plus la recherche.
-        </p>
-      </aside>
-    </div>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="year"></span> CovoitExpress – Exemple de site de covoiturage.</div>
-      <div class="footer-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
-        <a href="#">Cookies</a>
+        <strong>${r.price} €</strong>
       </div>
-    </div>
-  </footer>
+    `;
+  });
+</script>
 
-  <script src="assets/js/app.js"></script>
 </body>
 </html>
