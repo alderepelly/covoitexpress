@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mon Profil – JaalibaDaily</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+    .section {
+      margin-top: 2rem;
+      padding: 1.2rem;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(148,163,184,0.3);
+    }
+    .trips-list {
+      margin-top: 1rem;
+    }
+    .trip-item {
+      padding: 0.8rem;
+      border-radius: 10px;
+      background: #f1f5f9;
+      margin-bottom: 0.6rem;
+      border: 1px solid rgba(148,163,184,0.4);
+    }
+  </style>
 </head>
 
 <body>
@@ -15,33 +45,158 @@
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
-    <button class="btn btn-outline" onclick="logout()">Se déconnecter</button>
+
+    <div class="nav-cta">
+      <button class="btn btn-outline" onclick="logout()">Se déconnecter</button>
+      <a href="index.html" class="btn btn-primary">Accueil</a>
+    </div>
   </nav>
 </header>
 
-<div class="container-small">
+<div class="container">
+
   <h2 class="center">Mon Profil</h2>
 
-  <div class="form-card">
-    <p><strong>Email :</strong> <span id="userEmail"></span></p>
-
-    <p style="margin-top:1rem;">✨ Merci d’utiliser JaalibaDaily !</p>
+  <div class="center">
+    <img id="profilePic" class="profile-pic" src="assets/default-user.png" alt="Photo de profil">
+    <br>
+    <input type="file" id="uploadPic" accept="image/*" style="display:none;">
+    <button class="btn btn-outline" onclick="document.getElementById('uploadPic').click();">
+      Changer la photo
+    </button>
   </div>
+
+  <div class="section">
+    <h3>Informations personnelles</h3>
+
+    <label>Nom d'utilisateur</label>
+    <input id="username" type="text">
+
+    <label>Email</label>
+    <input id="email" type="email">
+
+    <label>Nouveau mot de passe</label>
+    <input id="password" type="password" placeholder="Laisser vide pour ne pas changer">
+
+    <button class="btn btn-primary" style="margin-top:1rem;" onclick="saveProfile()">
+      Enregistrer les modifications
+    </button>
+  </div>
+
+  <div class="section">
+    <h3>Mes trajets publiés</h3>
+    <div id="tripsContainer" class="trips-list"></div>
+  </div>
+
+  <div class="section" style="border-color:#f00;">
+    <h3 style="color:#b91c1c;">Danger</h3>
+    <button class="btn btn-outline" style="border-color:#b91c1c;color:#b91c1c;" onclick="deleteAccount()">
+      Supprimer mon compte
+    </button>
+  </div>
+
 </div>
 
 <script>
+/* Chargement du profil */
 const user = JSON.parse(localStorage.getItem("currentUser"));
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
+// Redirection si non connecté
 if (!user) {
   window.location.href = "connexion.html";
 }
 
-document.getElementById("userEmail").textContent = user.email;
+// Remplir les champs
+document.getElementById("username").value = user.username || "";
+document.getElementById("email").value = user.email;
 
+// Charger photo
+document.getElementById("profilePic").src =
+  user.photo ? user.photo : "assets/default-user.png";
+
+/* Upload d’image */
+document.getElementById("uploadPic").addEventListener("change", function () {
+  const file = this.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function (e) {
+    document.getElementById("profilePic").src = e.target.result;
+    user.photo = e.target.result;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+/* Enregistrer le profil */
+function saveProfile() {
+  const username = document.getElementById("username").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Vérifier email unique
+  if (users.some(u => u.email === email && u.email !== user.email)) {
+    alert("Cet email est déjà utilisé !");
+    return;
+  }
+
+  // Mise à jour
+  user.username = username;
+  user.email = email;
+  if (password !== "") user.password = password;
+
+  // Remplacer user dans users
+  users = users.map(u => u.email === user.email ? user : u);
+
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  alert("Profil mis à jour !");
+}
+
+/* Supprimer compte */
+function deleteAccount() {
+  if (!confirm("Voulez-vous vraiment supprimer votre compte ?")) return;
+
+  users = users.filter(u => u.email !== user.email);
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.removeItem("currentUser");
+
+  alert("Compte supprimé.");
+  window.location.href = "index.html";
+}
+
+/* Déconnexion */
 function logout() {
   localStorage.removeItem("currentUser");
   window.location.href = "index.html";
 }
+
+/* Affichage des trajets publiés */
+function loadTrips() {
+  let trips = JSON.parse(localStorage.getItem("trips")) || [];
+  let userTrips = trips.filter(t => t.owner === user.email);
+
+  let container = document.getElementById("tripsContainer");
+  container.innerHTML = "";
+
+  if (userTrips.length === 0) {
+    container.innerHTML = "<p>Aucun trajet publié.</p>";
+    return;
+  }
+
+  userTrips.forEach(t => {
+    container.innerHTML += `
+      <div class="trip-item">
+        <strong>${t.from} → ${t.to}</strong><br>
+        ${t.date} • ${t.seats} places<br>
+        Prix : ${t.price} GNF
+      </div>
+    `;
+  });
+}
+
+loadTrips();
 </script>
 
 </body>
