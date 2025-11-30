@@ -217,4 +217,40 @@ select:focus {
 .nav-right button:hover {
   color: var(--primary-dark);
 }
+/* ---- NAVIGATION SIMPLE ---- */
+
+.nav {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-right {
+  display: flex;
+  gap: 1.7rem;
+}
+
+.nav-right a,
+.nav-right button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: 0.2s ease;
+}
+
+.nav-right a:hover,
+.nav-right button:hover {
+  color: var(--primary-dark);
+}
+
+.nav-right button {
+  padding: 0;
+}
+
 
