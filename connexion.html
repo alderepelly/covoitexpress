@@ -81,6 +81,27 @@ document.getElementById("loginBtn").addEventListener("click", () => {
   window.location.href = "index.html";
 });
 </script>
+<script>
+document.getElementById("loginBtn").addEventListener("click", () => {
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if (!user) {
+    alert("Email ou mot de passe incorrect.");
+    return;
+  }
+
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  alert("Connexion réussie !");
+  window.location.href = "profil.html";
+});
+</script>
 
 
 </body>
