@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Connexion – CovoitExpress</title>
+  <title>Connexion – JaalibaDaily</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -13,7 +13,6 @@
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
-
     <div class="nav-cta">
       <a href="index.html" class="btn btn-outline">Accueil</a>
     </div>
@@ -33,54 +32,32 @@
   
   <h1 style="margin-bottom:1.5rem; font-size:2rem;">Connexion</h1>
 
-  <form class="form-card" style="text-align:left;">
+  <form class="form-card" style="text-align:left;" onsubmit="return false;">
     
     <div>
       <label>Email</label>
-      <input type="email" placeholder="exemple@mail.com" required>
+      <input id="email" type="email" placeholder="exemple@mail.com" required>
     </div>
 
     <div>
       <label>Mot de passe</label>
-      <input type="password" placeholder="••••••••" required>
+      <input id="password" type="password" placeholder="••••••••" required>
     </div>
 
-    <button class="btn btn-primary" style="margin-top: 0.5rem; width:100%; font-size:1rem;">
+    <button class="btn btn-primary" id="loginBtn" style="margin-top: 0.5rem; width:100%; font-size:1rem;">
       Se connecter
     </button>
   </form>
 
-  <!-- NOUVELLE SECTION CREER UN COMPTE -->
   <p style="margin-top: 1.8rem; color: var(--muted); font-size:0.9rem;">
-      Pas encore de compte ?
-      <br>
+      Pas encore de compte ?<br>
       <a href="inscription.html" style="color: var(--primary-dark); font-weight:600; font-size:1rem;">
         Créer un compte →
       </a>
   </p>
 
 </div>
-  <script>
-document.getElementById("loginBtn").addEventListener("click", () => {
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  const users = JSON.parse(localStorage.getItem("users")) || [];
-
-  const user = users.find(u => u.email === email && u.password === password);
-
-  if (!user) {
-    alert("Email ou mot de passe incorrect.");
-    return;
-  }
-
-  localStorage.setItem("currentUser", JSON.stringify(user));
-
-  alert("Connexion réussie !");
-  window.location.href = "index.html";
-});
-</script>
 <script>
 document.getElementById("loginBtn").addEventListener("click", () => {
 
@@ -102,7 +79,6 @@ document.getElementById("loginBtn").addEventListener("click", () => {
   window.location.href = "profil.html";
 });
 </script>
-
 
 </body>
 </html>
