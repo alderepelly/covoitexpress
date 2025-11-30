@@ -2,10 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Proposer un trajet – JaalibaDaily</title>
+  <title>Proposer un trajet – CovoitExpress</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
 
 <header>
@@ -14,118 +13,54 @@
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
-
-    <div class="nav-right" id="navRight"></div>
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-outline">Accueil</a>
+    </div>
   </nav>
 </header>
 
+<section class="container">
+  <h1 class="center">Proposer un trajet</h1>
 
-<div class="container-small">
-  <h2 class="center">Proposer un trajet</h2>
-
-  <form id="tripForm" class="form-card">
-
+  <form class="form-card">
     <div>
       <label>Départ</label>
-      <input id="from" type="text" placeholder="Matoto, Cosa, Kipé..." required>
+      <input type="text" id="from" placeholder="Ville de départ" required>
     </div>
 
     <div>
       <label>Arrivée</label>
-      <input id="to" type="text" placeholder="Kaloum, Lambanyi, Sonfonia..." required>
+      <input type="text" id="to" placeholder="Ville d’arrivée" required>
     </div>
 
     <div>
       <label>Date</label>
-      <input id="date" type="date" required>
+      <input type="date" id="date" required>
+    </div>
+
+    <div>
+      <label>Heure</label>
+      <input type="time" id="time" required>
     </div>
 
     <div>
       <label>Places disponibles</label>
-      <input id="seats" type="number" min="1" max="6" required>
+      <select id="seats">
+        <option value="1">1 place</option>
+        <option value="2">2 places</option>
+        <option value="3">3 places</option>
+        <option value="4">4 places</option>
+      </select>
     </div>
 
     <div>
-      <label>Prix (GNF)</label>
-      <input id="price" type="number" min="1000" required>
+      <label>Prix (€)</label>
+      <input type="number" id="price" min="1" placeholder="12" required>
     </div>
 
-    <button class="btn btn-primary" type="submit">Publier le trajet</button>
-
+    <button class="btn btn-primary">Publier le trajet</button>
   </form>
-</div>
-
-<script>
-// Vérifier si l'utilisateur est connecté
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-if (!currentUser) {
-  window.location.href = "connexion.html";
-}
-
-document.getElementById("tripForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const from = document.getElementById("from").value.trim();
-  const to = document.getElementById("to").value.trim();
-  const date = document.getElementById("date").value;
-  const seats = document.getElementById("seats").value;
-  const price = document.getElementById("price").value;
-
-  if (!from || !to || !date || !seats || !price) {
-    alert("Veuillez remplir tous les champs.");
-    return;
-  }
-
-  let trips = JSON.parse(localStorage.getItem("trips")) || [];
-
-  const newTrip = {
-    id: Date.now(),
-    owner: currentUser.email,
-    from,
-    to,
-    date,
-    seats,
-    price
-  };
-
-  trips.push(newTrip);
-  localStorage.setItem("trips", JSON.stringify(trips));
-
-  alert("Trajet publié avec succès !");
-  window.location.href = "profil.html";
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const navRight = document.getElementById("navRight");
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (!user) {
-        navRight.innerHTML = `
-            <a href="connexion.html">Connexion</a>
-            <a href="inscription.html">Créer un compte</a>
-        `;
-    } else {
-        navRight.innerHTML = `
-            <a href="index.html">Accueil</a>
-            <a href="recherche.html">Rechercher</a>
-            <a href="proposer.html">Proposer</a>
-            <a href="mes-reservations.html">Mes réservations</a>
-            <a href="profil.html">Profil</a>
-            <button id="logoutBtn">Se déconnecter</button>
-        `;
-    }
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            localStorage.removeItem("currentUser");
-            window.location.href = "index.html";
-        });
-    }
-});
-</script>
-
+</section>
 
 </body>
 </html>
