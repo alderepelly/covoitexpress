@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Profil – JaalibaDaily</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">JD</div>
+      <span>JaalibaDaily</span>
+    </div>
+    <button class="btn btn-outline" onclick="logout()">Se déconnecter</button>
+  </nav>
+</header>
+
+<div class="container-small">
+  <h2 class="center">Mon Profil</h2>
+
+  <div class="form-card">
+    <p><strong>Email :</strong> <span id="userEmail"></span></p>
+
+    <p style="margin-top:1rem;">✨ Merci d’utiliser JaalibaDaily !</p>
+  </div>
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("currentUser"));
+
+if (!user) {
+  window.location.href = "connexion.html";
+}
+
+document.getElementById("userEmail").textContent = user.email;
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
