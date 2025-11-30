@@ -117,6 +117,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const navRight = document.getElementById("navRight");
+    const user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if (!user) {
+        navRight.innerHTML = `
+            <a href="connexion.html">Connexion</a>
+            <a href="inscription.html">Créer un compte</a>
+        `;
+    } else {
+        navRight.innerHTML = `
+            <a href="index.html">Accueil</a>
+            <a href="recherche.html">Rechercher</a>
+            <a href="proposer.html">Proposer</a>
+            <a href="mes-reservations.html">Mes réservations</a>
+            <a href="profil.html">Profil</a>
+            <button id="logoutBtn">Se déconnecter</button>
+        `;
+    }
+
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("currentUser");
+            window.location.href = "index.html";
+        });
+    }
+});
+</script>
 
 
 </body>
