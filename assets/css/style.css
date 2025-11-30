@@ -10,11 +10,12 @@
   --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.12);
 }
 
+/* GLOBAL */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystem, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
@@ -43,8 +44,8 @@ header {
   margin: 0 auto;
   padding: 0.8rem 1.25rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -62,8 +63,8 @@ header {
   border-radius: 999px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   color: white;
   font-size: 1.1rem;
   box-shadow: 0 12px 24px rgba(12, 148, 136, 0.45);
@@ -81,12 +82,11 @@ header {
   padding: 0.55rem 1.2rem;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: 0.2s ease;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.4rem;
-  font-weight: 600;
 }
 
 .btn-primary {
@@ -120,7 +120,7 @@ header {
   max-width: 420px;
 }
 
-/* TITLES */
+/* TITLES & ALIGNMENT */
 .center {
   text-align: center;
 }
@@ -166,16 +166,19 @@ select:focus {
   display: flex;
   justify-content: space-between;
 }
-/* Boutons de suggestions (ex: Matoto → Kaloum) */
+
+/* SUGGESTION BUTTONS – clean final version */
 .search-meta button {
   background: #f1f5f9;
   border: 1px solid rgba(148,163,184,0.4);
-  padding: 0.3rem 0.7rem;
+  padding: 0.32rem 0.75rem;
   border-radius: 999px;
   font-size: 0.8rem;
   color: var(--text);
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  transition: 0.2s ease;
+  margin-right: 0.4rem;
+  margin-top: 0.4rem;
 }
 
 .search-meta button:hover {
@@ -184,19 +187,3 @@ select:focus {
   color: var(--primary-dark);
   box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
-.search-meta button {
-  background: #f1f5f9;
-  border: 1px solid rgba(148,163,184,0.4);
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  color: var(--text);
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-
-  /* AJOUT IMPORTANT */
-  margin-right: 0.4rem;
-  margin-top: 0.4rem;
-}
-
-
