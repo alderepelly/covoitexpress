@@ -41,4 +41,177 @@
                 <div class="pill" style="
                     display:inline-flex;align-items:center;gap:.6rem;
                     background:rgba(34,197,165,0.07);padding:.35rem .9rem;
-                    border-radius:999px;border:1px solid rgba(34,197
+                    border-radius:999px;border:1px solid rgba(34,197,165,0.3);">
+                    <span style="width:8px;height:8px;border-radius:50%;background:var(--secondary);"></span>
+                    <span style="font-size:.85rem;color:var(--primary-dark);font-weight:600;">Le covoiturage simple, flexible et sécurisé</span>
+                </div>
+
+                <h1 style="font-size:2.7rem;font-weight:800;margin-top:1rem;line-height:1.1;">
+                    Voyagez moins cher à <span style="color:var(--primary-dark);">Conakry</span>.
+                </h1>
+
+                <p style="max-width:32rem;color:var(--muted);margin-top:.7rem;">
+                    Trouvez un covoiturage en quelques clics, partagez les frais et déplacez-vous
+                    rapidement dans Conakry malgré le trafic.
+                </p>
+
+                <!-- SEARCH CARD -->
+                <div class="search-card"
+                    style="background:white;padding:1.2rem;border-radius:24px;margin-top:1.4rem;
+                    box-shadow:var(--shadow-soft);border:1px solid rgba(148,163,184,0.3);">
+
+                    <!-- TABS -->
+                    <div class="tabs" style="display:inline-flex;background:#f1f5f9;padding:.25rem;border-radius:999px;margin-bottom:1rem;">
+                        <button class="tab tab-active"
+                            style="padding:.45rem .9rem;border-radius:999px;background:white;font-size:.85rem;font-weight:600;border:none;color:var(--primary-dark);box-shadow:0 8px 20px rgba(148,163,184,0.45);">
+                            Je cherche un trajet
+                        </button>
+
+                        <a href="proposer.html" class="tab"
+                            style="padding:.45rem .9rem;border-radius:999px;font-size:.85rem;border:none;color:var(--muted);text-decoration:none;">
+                            Je propose un trajet
+                        </a>
+                    </div>
+
+                    <!-- FORM -->
+                    <form class="search-form" id="searchForm"
+                        style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;">
+
+                        <!-- DEPART -->
+                        <div class="field">
+                            <label for="from">Départ</label>
+                            <input class="field-input" id="from" placeholder="Matoto, Cosa, Kipé…" required />
+                        </div>
+
+                        <!-- ARRIVEE -->
+                        <div class="field">
+                            <label for="to">Arrivée</label>
+                            <input class="field-input" id="to" placeholder="Kaloum, Lambanyi, Sonfonia…" required />
+                        </div>
+
+                        <!-- DATE -->
+                        <div class="field">
+                            <label for="date">Date</label>
+                            <input class="field-input" id="date" type="date" required />
+                        </div>
+
+                        <!-- PLACES -->
+                        <div class="field">
+                            <label for="seats">Places</label>
+                            <select class="field-input" id="seats">
+                                <option>1 passager</option>
+                                <option>2 passagers</option>
+                                <option>3 passagers</option>
+                            </select>
+                        </div>
+                    </form>
+
+                    <!-- BUTTON -->
+                    <button id="searchBtn" class="btn btn-primary"
+                        style="width:100%;margin-top:1rem;border-radius:999px;font-size:.95rem;padding:.8rem;">
+                        Rechercher un covoiturage →
+                    </button>
+
+                    <!-- SUGGESTIONS -->
+                    <div class="search-meta" style="margin-top:.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;">
+                        <span style="font-size:.8rem;color:var(--muted);"><strong>+2 000</strong> trajets partagés ce mois-ci à Conakry.</span>
+
+                        <div style="display:flex;flex-wrap:wrap;">
+                            <button type="button">Matoto → Kaloum</button>
+                            <button type="button">Cosa → Kipé</button>
+                            <button type="button">Sonfonia → Lambanyi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRAJETS POPULAIRES -->
+            <div class="hero-right" style="margin-top:1rem;">
+                <div class="search-card"
+                    style="background:white;padding:1.2rem;border-radius:24px;
+                    box-shadow:var(--shadow-soft);border:1px solid rgba(148,163,184,0.3);">
+
+                    <h3 style="margin-bottom:.8rem;font-size:1.1rem;font-weight:700;">
+                        Trajets populaires aujourd'hui
+                    </h3>
+
+                    <div class="trip-list" style="display:flex;flex-direction:column;gap:.7rem;">
+
+                        <div class="trip" style="display:flex;justify-content:space-between;padding:.7rem;border-radius:16px;background:#f9fafb;border:1px solid rgba(148,163,184,0.3);">
+                            <div>
+                                <div style="font-weight:700;">Matoto → Kaloum</div>
+                                <div style="font-size:.8rem;color:var(--muted);">08:00 · 45min · Amadou • 4.9★</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <strong>15 000 GNF</strong><br />
+                                <span style="font-size:.8rem;color:var(--muted);">1 place</span>
+                            </div>
+                        </div>
+
+                        <div class="trip" style="display:flex;justify-content:space-between;padding:.7rem;border-radius:16px;background:#f9fafb;border:1px solid rgba(148,163,184,0.3);">
+                            <div>
+                                <div style="font-weight:700;">Cosa → Kipé</div>
+                                <div style="font-size:.8rem;color:var(--muted);">07:30 · 20min · Fatou • 4.7★</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <strong>10 000 GNF</strong><br />
+                                <span style="font-size:.8rem;color:var(--muted);">2 places</span>
+                            </div>
+                        </div>
+
+                        <div class="trip" style="display:flex;justify-content:space-between;padding:.7rem;border-radius:16px;background:#f9fafb;border:1px solid rgba(148,163,184,0.3);">
+                            <div>
+                                <div style="font-weight:700;">Sonfonia → Lambanyi</div>
+                                <div style="font-size:.8rem;color:var(--muted);">17:00 · 25min · Mohamed • 5.0★</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <strong>12 000 GNF</strong><br />
+                                <span style="font-size:.8rem;color:var(--muted);">3 places</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center;color:var(--muted);padding:1rem;margin-top:2rem;font-size:.8rem;">
+        © <span id="year"></span> CovoitExpress – Conakry, Guinée.
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        document.getElementById("searchBtn").addEventListener("click", () => {
+            const from = document.getElementById("from").value.trim();
+            const to = document.getElementById("to").value.trim();
+            const date = document.getElementById("date").value;
+            const seats = document.getElementById("seats").value;
+
+            if (!from || !to || !date) {
+                alert("Veuillez remplir les champs requis.");
+                return;
+            }
+
+            window.location.href =
+                `recherche.html?from=${from}&to=${to}&date=${date}&seats=${seats}`;
+        });
+
+        // Suggestions auto-remplissage
+        document.querySelectorAll(".search-meta button").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const [from, to] = btn.textContent.split("→").map(t => t.trim());
+                document.getElementById("from").value = from;
+                document.getElementById("to").value = to;
+                document.getElementById("date").value = new Date().toISOString().split("T")[0];
+            });
+        });
+    </script>
+
+</body>
+
+</html>
