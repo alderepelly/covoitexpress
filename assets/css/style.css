@@ -166,3 +166,22 @@ select:focus {
   display: flex;
   justify-content: space-between;
 }
+/* Boutons de suggestions (ex: Matoto → Kaloum) */
+.search-meta button {
+  background: #f1f5f9;
+  border: 1px solid rgba(148,163,184,0.4);
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.search-meta button:hover {
+  background: white;
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
