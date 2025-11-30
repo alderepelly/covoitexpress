@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes Réservations – JaalibaDaily</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .reservation-card {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      border: 1px solid rgba(148,163,184,0.35);
+    }
+
+    .reservation-header {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .reservation-meta {
+      margin-top: 0.4rem;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .delete-btn {
+      background: #fee2e2;
+      border: 1px solid #dc2626;
+      color: #b91c1c;
+      padding: 0.5rem;
+      width: 100%;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: .8rem;
+    }
+    .delete-btn:hover {
+      background: #fecaca;
+    }
+  </style>
+
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">JD</div>
+      <span>JaalibaDaily</span>
+    </div>
+
+    <div class="nav-cta">
+      <a href="index.html" class="btn btn-outline">Accueil</a>
+      <a href="profil.html" class="btn btn-primary">Profil</a>
+    </div>
+  </nav>
+</header>
+
+<div class="container">
+
+  <h2 class="center">Mes Réservations</h2>
+
+  <div id="reservations"></div>
+
+</div>
+
+<script>
+// Vérifier si utilisateur connecté
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+if (!currentUser) {
+  alert("Veuillez vous connecter.");
+  window.location.href = "connexion.html";
+}
+
+// Charger données
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+let trips = JSON.parse(localStorage.getItem("trips")) || [];
+
+// Réservations de l'utilisateur
+let myBookings = bookings.filter(b => b.user === currentUser.email);
+
+function loadReservations() {
+  const container = document.getElementById("reservations");
+  container.innerHTML = "";
+
+  if (myBookings.length === 0) {
+    container.innerHTML = "<p>Vous n'avez aucune réservation.</p>";
+    return;
+  }
+
+  myBookings.forEach(b => {
+    let trip = trips.find(t => t.id === b.tripId);
+
+    if (!trip) return;
+
+    container.innerHTML += `
+      <div class="reservation-card">
+        <div class="reservation-header">${trip.from} → ${trip.to}</div>
+
+        <div class="reservation-meta">
+          Date : ${trip.date}<br>
+          Places : ${trip.seats}<br>
+          Prix : ${trip.price} GNF<br>
+          Conducteur : ${trip.owner}
+        </div>
+
+        <button class="delete-btn" onclick="cancelReservation(${b.bookingId})">
+          Annuler la réservation
+        </button>
+      </div>
+    `;
+  });
+}
+
+loadReservations();
+
+// Annuler une réservation
+function cancelReservation(id) {
+  if (!confirm("Voulez-vous annuler cette réservation ?")) return;
+
+  bookings = bookings.filter(b => b.bookingId !== id);
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+
+  myBookings = bookings.filter(b => b.user === currentUser.email);
+
+  loadReservations();
+  alert("Réservation annulée.");
+}
+</script>
+
+</body>
+</html>
