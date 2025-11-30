@@ -2,9 +2,37 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Recherche de trajets – CovoitExpress</title>
+  <title>Recherche de trajets – JaalibaDaily</title>
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .results {
+      margin-top: 1.5rem;
+    }
+    .trip-card {
+      background: white;
+      padding: 1rem;
+      border-radius: 14px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.09);
+      border: 1px solid rgba(148,163,184,0.3);
+      margin-bottom: 1rem;
+    }
+    .trip-header {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .trip-meta {
+      margin-top: .4rem;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+    .reserve-btn {
+      margin-top: .8rem;
+      width: 100%;
+    }
+  </style>
 </head>
+
 <body>
 
 <header>
@@ -13,50 +41,121 @@
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
+
     <div class="nav-cta">
-      <a href="index.html" class="btn btn-outline">Nouvelle recherche</a>
+      <a href="index.html" class="btn btn-outline">Accueil</a>
+      <a href="profil.html" class="btn btn-primary">Mon profil</a>
     </div>
   </nav>
 </header>
 
-<section class="container">
-  <h1 class="center">Résultats de recherche</h1>
+<div class="container">
 
-  <p id="searchInfo" class="center" style="margin-top:1rem; color:var(--muted);"></p>
+  <h2 class="center">Rechercher un trajet</h2>
 
-  <div id="results"></div>
-</section>
+  <form id="searchForm" class="form-card">
+
+    <div>
+      <label>Départ</label>
+      <input id="from" type="text" placeholder="Matoto, Cosa, Kipé...">
+    </div>
+
+    <div>
+      <label>Arrivée</label>
+      <input id="to" type="text" placeholder="Kaloum, Lambanyi, Sonfonia...">
+    </div>
+
+    <div>
+      <label>Date</label>
+      <input id="date" type="date">
+    </div>
+
+    <button class="btn btn-primary" type="button" onclick="searchTrips()">Rechercher</button>
+
+  </form>
+
+  <div id="results" class="results"></div>
+
+</div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
+// Vérifier si utilisateur est connecté
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+if (!currentUser) {
+  alert("Vous devez être connecté pour rechercher un trajet.");
+  window.location.href = "connexion.html";
+}
 
-  const from = params.get("from");
-  const to = params.get("to");
-  const date = params.get("date");
+// Charger les trajets
+let trips = JSON.parse(localStorage.getItem("trips")) || [];
 
-  document.getElementById("searchInfo").innerHTML =
-    `Trajets de <strong>${from}</strong> vers <strong>${to}</strong> le <strong>${date}</strong>`;
+/* --- Recherche --- */
+function searchTrips() {
+  const from = document.getElementById("from").value.trim().toLowerCase();
+  const to = document.getElementById("to").value.trim().toLowerCase();
+  const date = document.getElementById("date").value;
 
-  const results = document.getElementById("results");
+  let results = trips.filter(t => {
+    return (
+      (from === "" || t.from.toLowerCase().includes(from)) &&
+      (to === "" || t.to.toLowerCase().includes(to)) &&
+      (date === "" || t.date === date)
+    );
+  });
 
-  // Exemple statique
-  const sampleResults = [
-    { time: "08:30", driver: "Clément", rating: "4.9★", price: 18 },
-    { time: "12:45", driver: "Sarah", rating: "5.0★", price: 20 },
-    { time: "19:00", driver: "Mehdi", rating: "4.8★", price: 15 }
-  ];
+  displayResults(results);
+}
 
-  sampleResults.forEach(r => {
-    results.innerHTML += `
-      <div class="ride-card">
-        <div>
-          <h3>${from} → ${to}</h3>
-          <p>${r.time} · ${r.driver} • ${r.rating}</p>
+/* --- Affichage des résultats --- */
+function displayResults(list) {
+  const container = document.getElementById("results");
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    container.innerHTML = "<p>Aucun trajet trouvé.</p>";
+    return;
+  }
+
+  list.forEach(t => {
+    container.innerHTML += `
+      <div class="trip-card">
+        <div class="trip-header">${t.from} → ${t.to}</div>
+        <div class="trip-meta">
+          Date : ${t.date}<br>
+          Places : ${t.seats}<br>
+          Prix : ${t.price} GNF<br>
+          Conducteur : ${t.owner}
         </div>
-        <strong>${r.price} €</strong>
+
+        <button class="btn btn-primary reserve-btn" onclick="reserve(${t.id})">
+          Réserver ce trajet
+        </button>
       </div>
     `;
   });
+}
+
+/* --- Réserver un trajet --- */
+function reserve(id) {
+  let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+  // vérifier si déjà réservé
+  if (bookings.some(b => b.tripId === id && b.user === currentUser.email)) {
+    alert("Vous avez déjà réservé ce trajet.");
+    return;
+  }
+
+  bookings.push({
+    bookingId: Date.now(),
+    tripId: id,
+    user: currentUser.email
+  });
+
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+
+  alert("Trajet réservé avec succès !");
+}
+
 </script>
 
 </body>
