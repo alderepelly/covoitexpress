@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Créer un compte – CovoitExpress</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer un compte – JaalibaDaily</title>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
 
 <header>
@@ -13,62 +15,59 @@
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
-
-    <div class="nav-cta">
-      <a href="index.html" class="btn btn-outline">Accueil</a>
-    </div>
+    <a href="index.html" class="btn btn-outline">Accueil</a>
   </nav>
 </header>
 
-<div style="
-  max-width: 520px;
-  margin: 4rem auto;
-  padding: 2.5rem;
-  background: white;
-  border-radius: 22px;
-  box-shadow: 0 25px 55px rgba(15,23,42,0.15);
-  text-align: center;
-  border: 1px solid rgba(148,163,184,0.25);
-">
+<div class="container-small">
+  <h2 class="center">Créer un compte</h2>
 
-  <h1 style="margin-bottom:1.5rem; font-size:2rem;">Créer un compte</h1>
+  <div class="form-card">
 
-  <form class="form-card" style="text-align:left;">
-    
-    <div>
-      <label>Nom complet</label>
-      <input type="text" placeholder="Votre nom" required>
-    </div>
+    <label>Email</label>
+    <input id="email" type="email" placeholder="exemple@mail.com" required>
 
-    <div>
-      <label>Email</label>
-      <input type="email" placeholder="exemple@mail.com" required>
-    </div>
+    <label>Mot de passe</label>
+    <input id="password" type="password" placeholder="••••••••" required>
 
-    <div>
-      <label>Mot de passe</label>
-      <input type="password" placeholder="••••••••" required>
-    </div>
+    <button class="btn btn-primary" id="registerBtn">Créer un compte</button>
 
-    <div>
-      <label>Confirmer le mot de passe</label>
-      <input type="password" placeholder="••••••••" required>
-    </div>
-
-    <button class="btn btn-primary" style="margin-top: 0.5rem; width:100%; font-size:1rem;">
-      Créer mon compte
-    </button>
-  </form>
-
-  <p style="margin-top: 1.8rem; color: var(--muted); font-size:0.9rem;">
+    <p class="center" style="margin-top:1rem;">
       Déjà un compte ?
-      <br>
-      <a href="connexion.html" style="color: var(--primary-dark); font-weight:600; font-size:1rem;">
-        Se connecter →
-      </a>
-  </p>
-
+      <a href="connexion.html" style="color:var(--primary-dark);font-weight:600;">Se connecter →</a>
+    </p>
+  </div>
 </div>
+
+<script>
+// INSCRIPTION
+document.getElementById("registerBtn").addEventListener("click", () => {
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  if (!email || !password) {
+    alert("Veuillez remplir tous les champs.");
+    return;
+  }
+
+  // Liste des utilisateurs existants
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  // Vérifier si l'email existe déjà
+  if (users.some(u => u.email === email)) {
+    alert("Un compte avec cet email existe déjà.");
+    return;
+  }
+
+  // Ajouter l'utilisateur
+  users.push({ email, password });
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Compte créé avec succès !");
+  window.location.href = "connexion.html";
+});
+</script>
 
 </body>
 </html>
