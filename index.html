@@ -2,955 +2,171 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>CovoitExpress – Covoiturage simple et sécurisé</title>
+  <title>CovoitExpress – Covoiturage Conakry simple et sécurisé</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --primary: #1c9ea8;
-      --primary-dark: #15737b;
-      --secondary: #ffcc4c;
-      --bg: #f4f7fb;
-      --text: #1f2933;
-      --muted: #6b7280;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    body {
-      background: radial-gradient(circle at top left, #e0f7fb, #f9fafb);
-      color: var(--text);
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-      background-color: rgba(248, 250, 252, 0.9);
-      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-    }
-
-    .nav {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0.8rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: .03em;
-    }
-
-    .logo-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.1rem;
-      box-shadow: 0 12px 24px rgba(12, 148, 136, 0.45);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover {
-      color: var(--primary-dark);
-    }
-
-    .nav-cta {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
-    }
-
-    .btn {
-      border-radius: 999px;
-      border: none;
-      padding: 0.55rem 1.2rem;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      box-shadow: 0 12px 25px rgba(15, 118, 110, 0.45);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 35px rgba(15, 118, 110, 0.55);
-    }
-
-    .btn-outline {
-      background: white;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      color: var(--text);
-    }
-
-    .btn-outline:hover {
-      border-color: var(--primary);
-      color: var(--primary-dark);
-      box-shadow: 0 10px 20px rgba(148, 163, 184, 0.45);
-      transform: translateY(-1px);
-    }
-
-    main {
-      max-width: 1120px;
-      margin: 1.5rem auto 3.5rem;
-      padding: 0 1.25rem;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: .6rem;
-      background: rgba(34, 197, 165, 0.07);
-      color: var(--primary-dark);
-      border-radius: 999px;
-      padding: 0.3rem .9rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.9rem;
-      border: 1px solid rgba(34, 197, 165, 0.3);
-    }
-
-    .pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--secondary);
-    }
-
-    .hero-title {
-      font-size: clamp(2.1rem, 3vw, 2.7rem);
-      line-height: 1.1;
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-title span {
-      color: var(--primary-dark);
-    }
-
-    .hero-subtitle {
-      font-size: 0.98rem;
-      color: var(--muted);
-      margin-bottom: 1.3rem;
-      max-width: 30rem;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 1.7rem;
-      margin-top: 1.3rem;
-      flex-wrap: wrap;
-    }
-
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-      font-size: 0.95rem;
-    }
-
-    .stat strong {
-      font-size: 1.2rem;
-    }
-
-    .search-card {
-      margin-top: 1.3rem;
-      background: white;
-      border-radius: 24px;
-      padding: 1.2rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    .tabs {
-      display: inline-flex;
-      background: #f1f5f9;
-      border-radius: 999px;
-      padding: 0.22rem;
-      margin-bottom: 0.9rem;
-      font-size: 0.85rem;
-    }
-
-    .tab {
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    .tab-active {
-      background: white;
-      color: var(--primary-dark);
-      box-shadow: 0 8px 20px rgba(148, 163, 184, 0.45);
-    }
-
-    .search-form {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.7rem;
-      align-items: center;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .field-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .field-input {
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      padding: 0.55rem 0.9rem;
-      font-size: 0.9rem;
-      outline: none;
-      background: #f9fafb;
-    }
-
-    .field-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.2);
-      background: white;
-    }
-
-    .small-badge {
-      font-size: 0.68rem;
-      padding: 0.08rem 0.45rem;
-      border-radius: 999px;
-      background: #e5f3ff;
-      color: #0369a1;
-    }
-
-    .search-btn {
-      width: 100%;
-      border-radius: 999px;
-      border: none;
-      padding: 0.65rem 1rem;
-      font-size: 0.95rem;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      box-shadow: 0 12px 25px rgba(15, 118, 110, 0.5);
-      transition: all 0.2s ease;
-      margin-top: 0.55rem;
-    }
-
-    .search-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 35px rgba(15, 118, 110, 0.6);
-    }
-
-    .search-meta {
-      margin-top: 0.6rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .search-meta span strong {
-      color: var(--primary-dark);
-    }
-
-    .search-meta-links {
-      display: flex;
-      gap: 0.7rem;
-      font-size: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .search-meta-links button {
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      padding: 0;
-      color: var(--muted);
-    }
-
-    .search-meta-links button:hover {
-      text-decoration: underline;
-      color: var(--primary-dark);
-    }
-
-    .hero-right {
-      position: relative;
-    }
-
-    .hero-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 1.2rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-    }
-
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-card-header h3 {
-      font-size: 0.95rem;
-    }
-
-    .tag {
-      font-size: 0.68rem;
-      padding: 0.15rem 0.45rem;
-      border-radius: 999px;
-      background: #eef2ff;
-      color: #4338ca;
-    }
-
-    .trip-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
-    }
-
-    .trip {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.6rem 0.65rem;
-      border-radius: 14px;
-      border: 1px solid rgba(226, 232, 240, 1);
-      background: #f9fafb;
-    }
-
-    .trip-main {
-      display: flex;
-      flex-direction: column;
-      gap: 0.05rem;
-    }
-
-    .trip-route {
-      font-weight: 600;
-    }
-
-    .trip-meta {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    .trip-price {
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-align: right;
-    }
-
-    .trip-seat {
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .badge-pill {
-      position: absolute;
-      right: -12px;
-      top: 30%;
-      background: white;
-      border-radius: 16px;
-      padding: 0.5rem 0.8rem;
-      font-size: 0.75rem;
-      box-shadow: 0 18px 35px rgba(15, 23, 42, 0.2);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      display: flex;
-      flex-direction: column;
-      gap: 0.1rem;
-    }
-
-    .badge-pill strong {
-      font-size: 0.9rem;
-    }
-
-    .steps {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.7rem;
-    }
-
-    .steps-title {
-      grid-column: 1 / -1;
-      margin-bottom: 0.5rem;
-      font-size: 1.25rem;
-    }
-
-    .step-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 1rem;
-      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
-      border: 1px solid rgba(148, 163, 184, 0.3);
-      font-size: 0.9rem;
-    }
-
-    .step-head {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .step-number {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #e0f2fe;
-      font-weight: 700;
-      font-size: 0.85rem;
-      color: #0369a1;
-    }
-
-    .step-title {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .step-body {
-      color: var(--muted);
-      margin-top: 0.3rem;
-    }
-
-    .trust-section {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .trust-title {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .trust-body {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-    }
-
-    .trust-list {
-      display: grid;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .trust-list li {
-      list-style: none;
-      display: flex;
-      gap: 0.5rem;
-      align-items: flex-start;
-    }
-
-    .trust-bullet {
-      margin-top: 0.3rem;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--primary);
-    }
-
-    .review-card {
-      background: white;
-      border-radius: var(--radius-lg);
-      padding: 1rem;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      font-size: 0.9rem;
-    }
-
-    .review-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.4rem;
-    }
-
-    .review-user {
-      display: flex;
-      gap: 0.6rem;
-      align-items: center;
-    }
-
-    .avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .review-name {
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    .review-meta {
-      font-size: 0.76rem;
-      color: var(--muted);
-    }
-
-    .review-stars {
-      font-size: 0.85rem;
-    }
-
-    footer {
-      border-top: 1px solid rgba(148, 163, 184, 0.35);
-      padding: 1.5rem 1.25rem 2rem;
-      margin-top: 2.5rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .footer-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
-      color: var(--primary-dark);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-right {
-        order: -1;
-      }
-      .steps {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .trust-section {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .badge-pill {
-        position: static;
-        margin-top: 0.8rem;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav-links {
-        display: none;
-      }
-      .search-form {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .search-btn {
-        margin-top: 0.2rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-  <header>
-    <nav class="nav">
-      <div class="logo">
-        <div class="logo-icon">JD</div>
-        <span>JaalibaDaily</span>
-      </div>
-      <div class="nav-links">
-        <a href="#comment-ca-marche">Comment ça marche</a>
-        <a href="#confiance">Sécurité & Confiance</a>
-        <a href="#aide">Centre d'aide</a>
-      </div>
-      <div class="nav-cta">
-        <a href="connexion.html" class="btn btn-primary">Se connecter</a>
-        <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
 
-      </div>
-    </nav>
-  </header>
+<!-- HEADER -->
+<header>
+  <nav class="nav">
+    <div class="logo">
+      <div class="logo-icon">JD</div>
+      <span>JaalibaDaily</span>
+    </div>
 
-  <main>
-    <section class="hero">
-      <!-- Colonne gauche -->
-      <div>
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Le covoiturage simple, flexible et sécurisé</span>
-        </div>
-        <h1 class="hero-title">
-          Voyagez moins cher en <span>partageant vos trajets</span>.
-        </h1>
-        <p class="hero-subtitle">
-          Trouvez un covoiturage en quelques clics, partagez les frais 
-          et rencontrez des personnes qui vont dans la même direction que vous.
-        </p>
+    <div class="nav-cta">
+      <a href="connexion.html" class="btn btn-outline">Se connecter</a>
+      <a href="proposer.html" class="btn btn-primary">Proposer un trajet</a>
+    </div>
+  </nav>
+</header>
 
-        <div class="search-card">
-          <div class="tabs">
-            <button class="tab tab-active" type="button" data-tab="passager">Je cherche un trajet</button>
-            <button class="tab" type="button" data-tab="conducteur">Je propose un trajet</button>
-          </div>
+<main>
 
-          <form class="search-form" id="searchForm">
-            <div class="field">
-              <div class="field-label">
-                <label for="from">Départ</label>
-              </div>
-              <input class="field-input" type="text" id="from" placeholder="Paris, Gare de Lyon" required>
-            </div>
-            <div class="field">
-              <div class="field-label">
-                <label for="to">Arrivée</label>
-              </div>
-              <input class="field-input" type="text" id="to" placeholder="Lyon, Part-Dieu" required>
-            </div>
-            <div class="field">
-              <div class="field-label">
-                <label for="date">Date</label>
-                <span class="small-badge">Flexible ?</span>
-              </div>
-              <input class="field-input" type="date" id="date" required>
-            </div>
-            <div class="field">
-              <div class="field-label">
-                <label for="seats">Places</label>
-              </div>
-              <select class="field-input" id="seats">
-                <option value="1">1 passager</option>
-                <option value="2">2 passagers</option>
-                <option value="3">3 passagers</option>
-                <option value="4">4 passagers</option>
-              </select>
-            </div>
-          </form>
+  <!-- HERO SECTION -->
+  <section class="hero" style="display:flex; flex-direction:column; align-items:center; text-align:center; margin-top:2rem;">
 
-          <button class="search-btn" id="searchBtn" type="button">
-                <span>Rechercher un covoiturage</span>
-                <span>→</span>
-          </button>
+    <div class="pill">
+      <span class="pill-dot"></span>
+      <span>Le covoiturage simple, rapide et sécurisé à Conakry</span>
+    </div>
 
+    <h1 class="hero-title">
+      Déplacez-vous moins cher à <span>Conakry</span>.
+    </h1>
 
-          <div class="search-meta">
-            <span><strong>Plus de 10 000</strong> trajets disponibles cette semaine.</span>
-            <div class="search-meta-links">
-              <button type="button">Paris → Lyon</button>
-              <button type="button">Marseille → Nice</button>
-              <button type="button">Bordeaux → Toulouse</button>
-            </div>
-          </div>
-        </div>
+    <p class="hero-subtitle">
+      Trouvez un trajet en quelques secondes pour éviter les embouteillages et économiser sur vos déplacements quotidiens.
+    </p>
 
-        <div class="hero-stats">
-          <div class="stat">
-            <strong>4.8★</strong>
-            <span>Note moyenne des conducteurs</span>
-          </div>
-          <div class="stat">
-            <strong>+2M</strong>
-            <span>sièges déjà partagés</span>
-          </div>
-          <div class="stat">
-            <strong>−30%</strong>
-            <span>d’impact CO₂ en moyenne</span>
-          </div>
-        </div>
+    <!-- SEARCH CARD -->
+    <div class="search-card" style="max-width:650px; width:100%;">
+      <div class="tabs">
+        <button class="tab tab-active">Je cherche un trajet</button>
+        <a href="proposer.html" class="tab" style="text-decoration:none;">Je propose un trajet</a>
       </div>
 
-      <!-- Colonne droite -->
-      <div class="hero-right">
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <h3>Trajets populaires aujourd'hui</h3>
-            <span class="tag">Temps réel</span>
-          </div>
-          <div class="trip-list" id="tripList">
-            <div class="trip">
-              <div class="trip-main">
-                <div class="trip-route">Paris → Lille</div>
-                <div class="trip-meta">08:30 · 2h20 · Clément • 4.9★</div>
-              </div>
-              <div>
-                <div class="trip-price">18 €</div>
-                <div class="trip-seat">1 place restante</div>
-              </div>
-            </div>
-            <div class="trip">
-              <div class="trip-main">
-                <div class="trip-route">Lyon → Marseille</div>
-                <div class="trip-meta">17:10 · 3h20 · Sonia • 4.8★</div>
-              </div>
-              <div>
-                <div class="trip-price">22 €</div>
-                <div class="trip-seat">3 places</div>
-              </div>
-            </div>
-            <div class="trip">
-              <div class="trip-main">
-                <div class="trip-route">Bordeaux → Toulouse</div>
-                <div class="trip-meta">19:00 · 2h15 · Mehdi • 5.0★</div>
-              </div>
-              <div>
-                <div class="trip-price">15 €</div>
-                <div class="trip-seat">2 places</div>
-              </div>
-            </div>
-          </div>
+      <form class="search-form" id="searchForm">
+        <div class="field">
+          <label>Départ</label>
+          <input class="field-input" type="text" id="from" placeholder="Matoto, Kipé, Cosa…" required>
         </div>
 
-        <div class="badge-pill">
-          <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted);">Économie moyenne</span>
-          <strong>80 € / mois</strong>
-          <span style="font-size: 0.75rem;">par conducteur régulier</span>
+        <div class="field">
+          <label>Arrivée</label>
+          <input class="field-input" type="text" id="to" placeholder="Kaloum, Lambanyi, Sonfonia…" required>
         </div>
-      </div>
-    </section>
 
-    <!-- Section Comment ça marche -->
-    <section id="comment-ca-marche" class="steps">
-      <h2 class="steps-title">Comment ça marche ?</h2>
-
-      <article class="step-card">
-        <div class="step-head">
-          <div class="step-number">1</div>
-          <div class="step-title">Crée ton compte en 2 minutes</div>
+        <div class="field">
+          <label>Date</label>
+          <input class="field-input" type="date" id="date" required>
         </div>
-        <p class="step-body">
-          Inscris-toi gratuitement avec ton email ou ton numéro de téléphone. 
-          Ajoute une photo, renseigne ton profil et vérifie ton identité pour inspirer confiance.
-        </p>
-      </article>
 
-      <article class="step-card">
-        <div class="step-head">
-          <div class="step-number">2</div>
-          <div class="step-title">Cherche un trajet ou propose le tien</div>
+        <div class="field">
+          <label>Places</label>
+          <select class="field-input" id="seats">
+            <option value="1">1 passager</option>
+            <option value="2">2 passagers</option>
+            <option value="3">3 passagers</option>
+          </select>
         </div>
-        <p class="step-body">
-          Indique ta ville de départ, d'arrivée et la date souhaitée. 
-          En tant que conducteur, fixe ton prix, le nombre de places et publie ton trajet.
-        </p>
-      </article>
+      </form>
 
-      <article class="step-card">
-        <div class="step-head">
-          <div class="step-number">3</div>
-          <div class="step-title">Voyagez ensemble en toute sérénité</div>
+      <button class="search-btn" id="searchBtn">
+        Rechercher un covoiturage →
+      </button>
+
+      <div class="search-meta">
+        <span><strong>+2 000</strong> trajets partagés ce mois-ci à Conakry.</span>
+
+        <div class="search-meta-links">
+          <button type="button">Matoto → Kaloum</button>
+          <button type="button">Cosa → Kipé</button>
+          <button type="button">Sonfonia → Lambanyi</button>
         </div>
-        <p class="step-body">
-          Discutez dans la messagerie intégrée, retrouvez-vous au point de rendez-vous et partagez les frais. 
-          À la fin du trajet, laissez un avis et notez votre expérience.
-        </p>
-      </article>
-    </section>
-
-    <!-- Section confiance / avis -->
-    <section id="confiance" class="trust-section">
-      <div>
-        <h2 class="trust-title">Une communauté basée sur la confiance</h2>
-        <p class="trust-body">
-          Sur CovoitExpress, chaque trajet est encadré pour garantir la sécurité des passagers comme des conducteurs.
-        </p>
-        <ul class="trust-list">
-          <li>
-            <span class="trust-bullet"></span>
-            <span>Profils vérifiés et notations après chaque trajet.</span>
-          </li>
-          <li>
-            <span class="trust-bullet"></span>
-            <span>Paiement sécurisé en ligne, sans échange d'argent liquide à bord.</span>
-          </li>
-          <li>
-            <span class="trust-bullet"></span>
-            <span>Service d'assistance en cas de problème avant, pendant ou après le trajet.</span>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="review-card">
-          <div class="review-header">
-            <div class="review-user">
-              <div class="avatar">L</div>
-              <div>
-                <div class="review-name">Laura, passagère régulière</div>
-                <div class="review-meta">+35 trajets · Paris ↔ Reims</div>
-              </div>
-            </div>
-            <div class="review-stars">★★★★★</div>
-          </div>
-          <p>
-            “Je prends le covoiturage toutes les semaines pour rentrer voir ma famille. 
-            Je trouve toujours un trajet, même au dernier moment, et j’ai rencontré 
-            des conducteurs vraiment sympas. L’app est simple et rassurante.”
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section aide (ancre simple) -->
-    <section id="aide" style="margin-top: 3rem; font-size: 0.9rem;">
-      <h2 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Besoin d’aide ?</h2>
-      <p style="color: var(--muted); max-width: 35rem;">
-        Questions sur les paiements, les bagages, les animaux de compagnie ou les annulations ? 
-        Consulte notre centre d’aide ou contacte notre équipe support.
-      </p>
-      <div style="margin-top: 0.7rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <button class="btn btn-outline" type="button">Accéder au centre d'aide</button>
-        <button class="btn btn-primary" type="button">Contacter le support</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div>© <span id="year"></span> CovoitExpress – Exemple de site de covoiturage.</div>
-      <div class="footer-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
-        <a href="#">Cookies</a>
       </div>
     </div>
-  </footer>
 
-  <script>
-    // Mise à jour de l'année dans le footer
-    document.getElementById("year").textContent = new Date().getFullYear();
+    <!-- STATS -->
+    <div class="hero-stats" style="justify-content:center;">
+      <div class="stat">
+        <strong>4.8★</strong>
+        <span>Conducteurs de confiance</span>
+      </div>
+      <div class="stat">
+        <strong>+500K</strong>
+        <span>km partagés</span>
+      </div>
+      <div class="stat">
+        <strong>−40%</strong>
+        <span>de frais économisés</span>
+      </div>
+    </div>
 
-    // Changement d’onglet passager/conducteur (visuel uniquement)
-    const tabs = document.querySelectorAll(".tab");
-    tabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        tabs.forEach(t => t.classList.remove("tab-active"));
-        tab.classList.add("tab-active");
-      });
-    });
+  </section>
 
-    // Simuler une recherche en redirigeant vers la page résultats
-const searchBtn = document.getElementById("searchBtn");
-const searchForm = document.getElementById("searchForm");
+  <!-- TRAJETS POPULAIRES -->
+  <section style="max-width:650px; margin:3rem auto;">
+    <h2 style="margin-bottom:0.7rem;">Trajets populaires aujourd’hui</h2>
 
-searchBtn.addEventListener("click", () => {
-  const from = document.getElementById("from").value.trim();
-  const to = document.getElementById("to").value.trim();
-  const date = document.getElementById("date").value;
-  const seats = document.getElementById("seats").value;
+    <div class="trip-list">
+
+      <div class="trip">
+        <div class="trip-main">
+          <div class="trip-route">Matoto → Kaloum</div>
+          <div class="trip-meta">08:00 • 45min • Amadou • 4.9★</div>
+        </div>
+        <div>
+          <div class="trip-price">15 000 GNF</div>
+          <div class="trip-seat">1 place restante</div>
+        </div>
+      </div>
+
+      <div class="trip">
+        <div class="trip-main">
+          <div class="trip-route">Cosa → Kipé</div>
+          <div class="trip-meta">07:30 • 20min • Fatou • 4.7★</div>
+        </div>
+        <div>
+          <div class="trip-price">10 000 GNF</div>
+          <div class="trip-seat">2 places</div>
+        </div>
+      </div>
+
+      <div class="trip">
+        <div class="trip-main">
+          <div class="trip-route">Sonfonia → Lambanyi</div>
+          <div class="trip-meta">17:00 • 25min • Mohamed • 5.0★</div>
+        </div>
+        <div>
+          <div class="trip-price">12 000 GNF</div>
+          <div class="trip-seat">3 places</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script>
+document.getElementById("searchBtn").addEventListener("click", () => {
+  const from = from.value.trim();
+  const to = to.value.trim();
+  const date = date.value;
+  const seats = seats.value;
 
   if (!from || !to || !date) {
-    alert("Merci de renseigner au moins le départ, l'arrivée et la date.");
+    alert("Veuillez remplir les champs obligatoires.");
     return;
   }
 
-  const params = new URLSearchParams({
-    from,
-    to,
-    date,
-    seats
-  });
-
-  // redirection vers la page des résultats
-  window.location.href = `recherche.html?${params.toString()}`;
+  window.location.href = `recherche.html?from=${from}&to=${to}&date=${date}&seats=${seats}`;
 });
+</script>
 
-
-    // Raccourcis trajets populaires sous le formulaire
-    document.querySelectorAll(".search-meta-links button").forEach(button => {
-      button.addEventListener("click", () => {
-        const [from, to] = button.textContent.split("→").map(t => t.trim());
-        document.getElementById("from").value = from;
-        document.getElementById("to").value = to;
-        const today = new Date().toISOString().split("T")[0];
-        document.getElementById("date").value = today;
-      });
-    });
-  </script>
 </body>
 </html>
