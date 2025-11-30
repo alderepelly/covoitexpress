@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Connexion – CovoitExpress</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
@@ -13,16 +13,28 @@
       <div class="logo-icon">JD</div>
       <span>JaalibaDaily</span>
     </div>
+
     <div class="nav-cta">
       <a href="index.html" class="btn btn-outline">Accueil</a>
     </div>
   </nav>
 </header>
 
-<section class="container-small">
-  <h1 class="center">Se connecter</h1>
+<div style="
+  max-width: 520px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 25px 55px rgba(15,23,42,0.15);
+  text-align: center;
+  border: 1px solid rgba(148,163,184,0.25);
+">
+  
+  <h1 style="margin-bottom:1.5rem; font-size:2rem;">Connexion</h1>
 
-  <form class="form-card">
+  <form class="form-card" style="text-align:left;">
+    
     <div>
       <label>Email</label>
       <input type="email" placeholder="exemple@mail.com" required>
@@ -33,18 +45,21 @@
       <input type="password" placeholder="••••••••" required>
     </div>
 
-    <button class="btn btn-primary" type="submit">Connexion</button>
+    <button class="btn btn-primary" style="margin-top: 0.5rem; width:100%; font-size:1rem;">
+      Se connecter
+    </button>
   </form>
 
-  <!-- SECTION CREATION DE COMPTE -->
-  <div class="center" style="margin-top: 1rem; color: var(--muted);">
-      Pas encore de compte ?<br>
-      <a href="inscription.html" style="color: var(--primary-dark); font-weight:600;">
+  <!-- NOUVELLE SECTION CREER UN COMPTE -->
+  <p style="margin-top: 1.8rem; color: var(--muted); font-size:0.9rem;">
+      Pas encore de compte ?
+      <br>
+      <a href="inscription.html" style="color: var(--primary-dark); font-weight:600; font-size:1rem;">
         Créer un compte →
       </a>
-  </div>
+  </p>
 
-</section>
+</div>
 
 </body>
 </html>
