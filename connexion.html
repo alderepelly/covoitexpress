@@ -7,6 +7,7 @@
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <nav class="nav">
     <div class="logo">
@@ -18,7 +19,7 @@
   </nav>
 </header>
 
-
+<!-- FORMULAIRE DE CONNEXION -->
 <div style="
   max-width: 520px;
   margin: 4rem auto;
@@ -32,21 +33,22 @@
   
   <h1 style="margin-bottom:1.5rem; font-size:2rem;">Connexion</h1>
 
-  <form class="form-card" style="text-align:left;" onsubmit="return false;">
+  <form id="loginForm" class="form-card" style="text-align:left;">
     
     <div>
       <label>Email</label>
-      <input id="email" type="email" placeholder="exemple@mail.com" required>
+      <input id="email" type="email" placeholder="exemple@mail.com" required />
     </div>
 
     <div>
       <label>Mot de passe</label>
-      <input id="password" type="password" placeholder="••••••••" required>
+      <input id="password" type="password" placeholder="••••••••" required />
     </div>
 
     <button class="btn btn-primary" id="loginBtn" style="margin-top: 0.5rem; width:100%; font-size:1rem;">
       Se connecter
     </button>
+
   </form>
 
   <p style="margin-top: 1.8rem; color: var(--muted); font-size:0.9rem;">
@@ -58,8 +60,10 @@
 
 </div>
 
+<!-- SCRIPT CONNEXION -->
 <script>
-document.getElementById("loginBtn").addEventListener("click", () => {
+document.getElementById("loginForm").addEventListener("submit", (e) => {
+  e.preventDefault(); // Empêche le rechargement de la page
 
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -73,12 +77,15 @@ document.getElementById("loginBtn").addEventListener("click", () => {
     return;
   }
 
+  // Sauvegarde de l'utilisateur connecté
   localStorage.setItem("currentUser", JSON.stringify(user));
 
   alert("Connexion réussie !");
   window.location.href = "profil.html";
 });
 </script>
+
+<!-- SCRIPT NAVIGATION DYNAMIQUE -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const navRight = document.getElementById("navRight");
@@ -101,15 +108,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            localStorage.removeItem("currentUser");
-            window.location.href = "index.html";
-        });
-    }
-});
-</script>
-
-
-</body>
-</html>
+    if (logo
